@@ -73,6 +73,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ChatGLM的CPU推理方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/" class="article-date">
+  <time class="dt-published" datetime="2023-08-20T11:12:07.000Z" itemprop="datePublished">2023-08-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/">ChatGLM的CPU推理方案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer, AutoModel</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>)</span><br><span class="line">model = AutoModel.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>).half().<span class="built_in">float</span>()</span><br><span class="line">model = model.<span class="built_in">eval</span>()</span><br><span class="line">response, history = model.chat(tokenizer, <span class="string">&quot;写一首赞美雪的现代诗&quot;</span>, history=[])</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/" data-id="clljcsk190001fsdmbsxzhj9o" data-title="ChatGLM的CPU推理方案" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-紫鲸第一章" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="article-date">
@@ -104,50 +143,12 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/" data-id="cllcdua14000daodm22dg1aox" data-title="紫鲸第一、二章" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/" data-id="clljcsk1n000cfsdmc159hmod" data-title="紫鲸第一、二章" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B4%AB%E9%B2%B8/" rel="tag">紫鲸</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-手把手教你建立自己的博客网站" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/08/15/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" class="article-date">
-  <time class="dt-published" datetime="2023-08-14T18:06:10.000Z" itemprop="datePublished">2023-08-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/08/15/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">手把手教你建立自己的博客网站</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/15/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" data-id="cllcdua13000baodm653lf5cp" data-title="手把手教你建立自己的博客网站" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
     </footer>
   </div>
   
@@ -187,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/14/%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/" data-id="cllcdua120009aodm5gqab9c9" data-title="一些思考" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/14/%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/" data-id="clljcsk1h000afsdmguqm4d0h" data-title="一些思考" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -240,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/14/C-%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/" data-id="cllcdua0q0000aodm5eazdx2n" data-title="C++学习——函数" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/14/C-%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0/" data-id="clljcsk150000fsdmd04z8yqe" data-title="C++学习——函数" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -281,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/14/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/" data-id="cllcdua14000caodm3iaufogy" data-title="第一个博客" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/14/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/" data-id="clljcsk1n000dfsdm00gp5mj8" data-title="第一个博客" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -319,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/14/%E4%B8%AD%E6%96%87%E6%B5%8B%E8%AF%95%E4%B8%80/" data-id="cllcdua13000aaodm6s8l71yp" data-title="中文测试一" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/14/%E4%B8%AD%E6%96%87%E6%B5%8B%E8%AF%95%E4%B8%80/" data-id="clljcsk1i000bfsdm7txz2ria" data-title="中文测试一" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -357,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/14/My-New-Post/" data-id="cllcdua0w0002aodmf1yfge1n" data-title="My New Post" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/14/My-New-Post/" data-id="clljcsk1b0002fsdm48r89sc3" data-title="My New Post" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -395,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/14/NEW/" data-id="cllcdua0u0001aodmczdgct4j" data-title="NEW" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/14/NEW/" data-id="clljcsk1d0006fsdmg9m0c7t3" data-title="NEW" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -433,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/14/blog/" data-id="cllcdua0x0003aodm0tof2qej" data-title="blog" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/14/blog/" data-id="clljcsk1c0003fsdm7kwl3z3i" data-title="blog" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -471,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/08/14/this/" data-id="cllcdua100006aodm2fbi6qtg" data-title="this" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2023/08/14/this/" data-id="clljcsk1f0007fsdmfeh6al79" data-title="this" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -533,11 +534,11 @@
       <ul>
         
           <li>
-            <a href="/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/">紫鲸第一、二章</a>
+            <a href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/">ChatGLM的CPU推理方案</a>
           </li>
         
           <li>
-            <a href="/2023/08/15/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%BB%BA%E7%AB%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">手把手教你建立自己的博客网站</a>
+            <a href="/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/">紫鲸第一、二章</a>
           </li>
         
           <li>
