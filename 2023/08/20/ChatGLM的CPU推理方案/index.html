@@ -52,8 +52,21 @@
 
 <article class="markdown-container">
     <section>
-        <h1>ChatGLM的CPU推理方案</h1>
+        <h1>
+            <span>
+                ChatGLM的CPU推理方案
+            </span>
+        
+            <div class="post-info">
+                <span></span>
+                <span>
+                    1k字 • 
+                    2分钟
+                </span>
+            </div>
+        </h1>
     </section>
+
     <section class="article">
         <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer, AutoModel</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>)</span><br><span class="line">model = AutoModel.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>).half().<span class="built_in">float</span>()</span><br><span class="line">model = model.<span class="built_in">eval</span>()</span><br><span class="line">response, history = model.chat(tokenizer, <span class="string">&quot;写一首赞美雪的现代诗&quot;</span>, history=[])</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
 
@@ -64,7 +77,7 @@
 
     <section class="post-cc">
         <div class="post-cc-author">
-            <span class="bold">作者：</span><a href="mailto:jjack_chen3@163.com" title="Steve Hu">Steve Hu</a>
+            <span class="bold">作者：</span><a href="mailto:fatcathello@outlook.com" title="Steve Hu">Steve Hu</a>
         </div>
         <div class="post-cc-link">
             <span class="bold">链接：</span><a href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/">https://lovehuiyuanai.github.io/2023/08/20/ChatGLM的CPU推理方案/</a>
@@ -115,15 +128,15 @@
             <section class="article-bottom flex-between">
                 <div class="flex-center">
                     <img src="/imgs/logo.png" class="logo">
-                    <span>长风破浪会有时，直挂云帆济沧海</span>
+                    <span>海纳百川有容乃大；壁立千仞无欲则刚</span>
                 </div>
                 <div class="flex-center">
-                    <a href="mailto:jjack_chen3@163.com">
+                    <a href="mailto:fatcathello@outlook.com">
                         <span title="envelope">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
                     </a>
-                    <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">
+                    <a target="_blank" rel="noopener" href="https://github.com/lovehuiyuanai">
                         <span title="github" style="font-size: 18px;">
                             <i class="fa fa-github" aria-hidden="true"></i>
                         </span>

@@ -199,6 +199,11 @@ html.ie6 .container {
 .fancy-color {
   animation: changeColor 30s infinite both;
 }
+.post-info {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #888;
+}
 @-moz-keyframes changeColor {
   0% {
     color: #ed5564;
