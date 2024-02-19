@@ -1,74 +1,243 @@
+<!--
+	作者：Sariay
+	时间：2018-08-26
+	描述：There may be a bug, but don't worry, Qiling(器灵) says that it can work normally! aha!
+-->
 <!DOCTYPE html>
-
-<html lang="zh-CN">
+<html class="html-loading">
+		
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steve Hu的博客 | OpenXiko介绍文档</title>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      OpenXiko介绍文档 | Steve Hu的博客
+    
+  </title>
+  <meta name="author" content="Steve Hu">
+  <meta name="keywords" content="" />
+  <meta name="description" content="最爱哀酱！" />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
 
-    
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="Steve Hu">
+  <!-- css -->
+  
+<link rel="stylesheet" href="/css/Annie.css">
 
-    <meta name="color-scheme" content="light dark">
+  
+  <!-- jquery -->
+	
+<script src="/plugin/jquery/jquery.min.js"></script>
 
-    
-    
-<link rel="stylesheet" href="/styles/index.css">
 
-    
-    <link rel="shortcut icon" href="/imgs/logo.png">
-
-    
-    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
-    
-    
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/base16/solarized-light.css">
-    
-
-    
+<script>
+    const CONFIG_BGIMAGE = {
+      mode: 'normal',
+      normalSrc: '/img/header-bg.jpg',
+      randomYouMax: 110,
+      randomYouSrc: 'https://sariay.github.io/Random-img/',
+	  randomOtherSrc: 'https://api.berryapi.net/?service=App.Bing.Images&day=-0',
+	  preloaderEnable: true
+    }
+	
+    const CONFIG_LEACLOUD_COUNT = {
+      enable: false,
+	  appId: 'AU8...',
+	  appKey: '4cU...',
+	  serverURLs: 'http' || ' '
+    }
+  </script>
 <meta name="generator" content="Hexo 6.3.0"></head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+						
+		</div>
+	</div>
 
 
-<body id="delicate-app">
-    <main>
-        <div class="container">
-            <section class="page-top-badge flex-between w100">
-                <div>
-                    <a href="/">
-                        <span title="github"><i class="fa fa-home" aria-hidden="true"></i></span>
-                    </a>
-                </div>
-                <!-- <div>
-                    
-                </div> -->
-            </section>
-            <aside class="toc-container">
-    <!-- sticky toc -->
-    
-</aside>
+<!-- header -->
+<header class="fixbackground bg-pan-br">
+	<div class="mask">
+		<!-- motto -->
+		<div class="h-body">	
+			
+				<div class="motto text-shadow-pop-left">
+					<p class="content" id="motto-content">获取中...</p>
+					<p>-<p>
+					<p class="author" id="motto-author">Just a minute...</p>
+				</div>
+			
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<a href="javascript:;" id="read-more" class="scroll-down">
+				<span class="icon-anchor1 animation-scroll-down"></span>
+			</a>
+		</div>
+	</div>
+</header>
 
-<article class="markdown-container">
-    <section>
-        <h1>
-            <span>
-                OpenXiko介绍文档
-            </span>
-        
-            <div class="post-info">
-                <span></span>
-                <span>
-                    4k字 • 
-                    8分钟
-                </span>
-            </div>
-        </h1>
-    </section>
+<div id="navigation-hide">
+	<!-- Progress bar -->
+	<div id="progress-bar"></div>
 
-    <section class="article">
-        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+	<!-- Progress percent -->
+	<div id="progress-percentage"><span>0.0%</span></div>
+
+	<div class="toc-switch"><span class="switch-button">目录</span></div>
+
+	<!-- Page title -->
+	<p>
+		
+			「OpenXiko介绍文档」
+		
+	</p>
+
+	
+	
+
+	<!-- Nav trigger for navigation-H-->
+	<a class="nav-trigger"><span></span></a>
+</div>
+
+<!-- Navigation in div(id="navigation-H") -->
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<span class="logo"> 
+			<img src="/img/logo.png">
+		</span>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	
+	<div class="nav-body">
+		<ul id="global-nav">
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home" target="_blank">主页</a>
+		</li>
+		
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive" target="_blank">归档</a>
+		</li>
+		
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories" target="_blank">分类</a>
+		</li>
+		
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags" target="_blank">标签</a>
+		</li>
+		
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about" target="_blank">关于</a>
+		</li>
+		
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery" target="_blank">相册</a>
+		</li>
+		
+	
+
+	
+</ul>
+	</div>
+	
+	<div class="nav-footer">
+		<ul id="global-social">
+	
+		<li>
+			<a href="http://github.com/" target="_blank">
+				<span class="icon-github"></span>
+			</a>
+		</li>
+	
+		<li>
+			<a href="/atom.xml" target="_blank">
+				<span class="icon-rss"></span>
+			</a>
+		</li>
+			
+</ul>
+
+	</div>
+</nav>
+			
+		<!--main-->
+		<main>
+			<!--
+	时间：2018-11-17
+	描述：
+		插件名称：katelog.min.js
+		插件作者：KELEN
+		插件来源: https://github.com/KELEN/katelog
+-->
+	 
+
+<div class="layout-post">
+	<div id="layout-post">
+		<div class="article-title">
+			
+	<a href="/2023/01/28/blog/" itemprop="url">
+		OpenXiko介绍文档
+	</a>
+
+		</div>
+
+		<div class="article-meta">
+			<span>
+				<i class="icon-calendar1"></i>
+				
+				
+
+
+
+
+	更新于
+
+	<a href="/2023/01/28/blog/" itemprop="url">
+		<time datetime="2023-01-28T00:04:21.000Z" itemprop="dateUpdated">
+	  		2024-01-28
+	  </time>
+	</a> 
+
+
+
+			</span>
+			<span>
+				
+	<i class="icon-price-tags"></i>
+	
+		<a href="/tags/%E5%B0%8F%E8%83%A1%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" class=" ">
+			小胡的开源项目
+		</a>
+	
+		
+			</span>
+			
+			
+
+
+
+		</div>
+
+		<div class="article-content" id="article-content">
+			<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
   <script id="hbeData" type="hbeData" data-hmacdigest="9caa2a154b01a2d479ab3b1539d499e62ab43e877e93d52d2e2f0938eaacc488">8c83c1fd70b2001f095a68c8e758fb29a64c839951abd85de7d8dc7c785db45442cc09ac3d5af73bfac9753a38f086d9dc2f4e0accd966dd6f0c972a21d5f12a4f7c4acd96c905fa6b362ba2dc4cefc26c9eda0977a8910c1d7e1903c96b2fc40b04f1276287e832e52959a107b0bf3cc6086b2a014ba04f7b969394b3b58815547bd9cf99afa574488250554de34bd5d622634b926e624b83727dfac9888f806a3edc412eb8dc7199e1a0ab35f938041212be197cb4032349f0ac2f16f02ba0b065dd524e640d6912bdc6a1c12fc25a480bdcfc69796c832383314bc7c57dc4ff21b75a760af9a5e905584e9c3946c96c70a1ee4b5a4b68d5e4a44268e7ab4f2f997a254a2c4ac3aa120037a992191cfaef54c3f5992c82f0b13f0afcf80f0a391e3d45470cc32ff8a622ce4182cb3fa14e2979eb2bdfa857df9135f1046f2f93b7d6ca212c903b9b9eaab5fdae4b27f60abde805b7225890326238545ee5db66899c8c3958916b6994f1ad8f4085fa7682a9d0f789e924808eed8f3079e2d4d3e113c1edd5ce69206ce72c18c44819a96fe69c3bcf39833287531bc707727ae7f9d5c6d086c691f8db7765729a7d8694ca45433751fed2cc02c0a4e6bc4f316d625d1a48547f8f69b656594380cb607ef59d402d1418d5c5babde66e993e352cb5a2143c6b7a9cd4cce77fd5b0742868070a1907385085acc40cfc10f4865ed19f1a9efa8517a21ca38665db6958a888e8dceae2790879d152277ae7aa8840bd941916eb86fcc5dcdb37bae0037d03a89e51e56279de730bbcd173768083ea7a65ec3c4404e6b918d0de3d2d47ae40feefbb6f389faa7b34d9d2c609bb52781f44ab101f9438d30a6558e6cf37b8e7bea293793a879e2dcd343f4c3a5cee990f22b51866320c6a2152fa615a639d2eaa9491691fb01db7c400a92c9779dc9ffde7204bdae3bb54954fc5217a604f653d4dc0e702160111bba67aa5233aac7e249c4808555e77399e80343d94b001db27a6023de8f1c1f51cdb62ec4f34cbd1dcdf561d0339d738722b2c18c1f05f3562e3ed1ee2e10cc1d41a3be3bd732f55c502d2ad5f2f1034c03b4ea2f9829f3a21608d70a403d0b587894762f56163743d5752f5e5b6fba22251f195f3bc18863d44c068d28f8f67546f3d391f4502f28646286279e541c79dc8d30279e8cec7c98702ae55d650745d8c08d32690d0d37cd7d1ba227dc7549a635fc029004b3a0d1d4484fb97455b147647366a448d40a38a83e07d16390afd08ef2a3947b674268dd48b9cd588fca35487cb05983296ad27d664e5cf3e22e1757cbabde26c08f14cd758ba9f5020e606c6abfa24e54d7baab06280053ca9c3e3a3f222db39d23fd920427177bb50215acb5694b600a11ffe73c9c2cee3dc457453bf201e466087c0e0c4655990e92f5bc35e22b007b05caedfa2b04987fdf62bb0c43ae50de805babf2580df92973aa6a7fbaf5c8a07f3e499360d6cea216b7001cfcb34f594e218a4effc84b158e4a9411530f0fa9f152cf6846d22c88aa9e9200cfed6c55b30339224f025c95f6f9aea8680d82aa88acdeff1ecb4ce1026ecfff5bc8c8495f72dcff28c262a3f1ecac33ef2cd4f8ed14a57fed127772931674abc345543d3a161216c0364d5fdf7d6586ab46692c1fe0192b90eed1d23cf19c3807d81ba8ab6d25dc3d14f155cb67d9d0a631039fb1ba513bf6886aa470e7ba1726f3eca079b588862fe8366ed73b9415c872f5807538570df06cfc26cd7270f6e1583ec927b2f843491e35fcaf1d165317df30549685b68c690d9156c5cfea1747394582aa56b37bb7c909576268eee1308e47bf7cf70d356ea61c4184cfebbe70cc6dc4f31fcb9f1deae52d35129974cd4222959dd28dedf285125f564bca4fe75419618c18d6998b5d4f1336b4f6bb563c135da5e1e43a81be52030739012186d7c3f31ffd0253e2dd73b7fa8122281e4710c168f1e00cd27302e2168876d5262faa75bdbaf5cb342dc70266e688bfbe8cda25e10fd9d1c2a2784b3b3e67f596aff9e3a6d19ead7a09c775367e09f2122919e0bddba68c960153bc9ab8cc1ef862dc28ef7df21668a285f85b0b2e808cd309eb81d74227ef1cf8da6bfe3dc1e0777134c</script>
   <div class="hbe hbe-content">
     <div class="hbe hbe-input hbe-input-default">
@@ -79,107 +248,664 @@
     </div>
   </div>
 </div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-    </section>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">	
+		</div>
+		
+		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
 
-    
-        <section class="post-tag">
-            <a href="/tags"><i class="fa fa-tags"></i></a>
-            
-                <a href="/tags/%E5%B0%8F%E8%83%A1%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" class="tag-item">
-                    小胡的开源项目
-                </a>
-            
-        </section>
-    
-    
-
-    <section class="post-cc">
-        <div class="post-cc-author">
-            <span class="bold">作者：</span><a href="mailto:fatcathello@outlook.com" title="Steve Hu">Steve Hu</a>
-        </div>
-        <div class="post-cc-link">
-            <span class="bold">链接：</span><a href="/2023/01/28/blog/">https://lovehuiyuanai.github.io/2023/01/28/blog/</a>
-        </div>
-        <div class="post-cc-source">
-            <span class="bold">来源：</span><a href="/">Steve Hu的博客</a>
-        </div>
-        <div class="ppost-cc-declare">
-            <span class="bold">版权声明: </span>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> 许可协议。著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 
-        </div>
-    </section>
-
-    <section class="flex-between" style="margin: 20px 0;">
-        <div class="pre">
-            
-                <a href="/2023/08/14/test-my-site/" class="change-link">
-                    <span class="icon"><i class="fa fa-angle-double-left"></i></span>
-                    <span class="text">
-                        <span class="identify">上一篇</span>
-                        <span class="text-title">test_my_site</span>
-                    </span>
-                </a>
-            
-        </div>
-        <div class="next">
-            
-        </div>
-    </section>
-
-    <!-- comment -->
-    <section class="comment-container">
-        <!-- giscus -->
-        
-    </section>
-</article>
+		<!-- relate post, comment...-->
+		<div class="investment-container">
+			<div class="investment-header">
+				<div class="investment-title-1">
+					<div class="on">相关文章</div>
+					<div>评论</div>
+					<div>分享</div>
+				</div>
+				<div class="investment-title-2">	            
+					
+	<span>
+		<a id="totop-post-page">返回顶部</a>
+		
+			<a href="/2023/08/14/test-my-site/" title="test_my_site" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+			
+	</span>
 
 
+      		
+				</div>	
+			</div>
+			
+			<div class="investment-content">
+				<div class="investment-content-list">
+					
 
+<div class="relate-post">
+	
+		<ul>
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2024/02/19/%E5%85%AC%E5%91%8A/" title="小学留言墙">
+								小学留言墙			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 19日, 2024				
+							</p>
+							<p class="relate-post-content">
+								#小学留言墙小胡在此感谢大家对我的包容与帮助，谢谢大家。若你有想对我说的话，请在下方留言，小胡会一条一条的看的。若你还想跟小胡保持联系，小胡绝对不会拒绝，以下是我的联系方式：####电子邮箱  &#x31;&#x33;&#54;&#5...
+							</p>
+						</div>
 
-            <section class="article-bottom flex-between">
-                <div class="flex-center">
-                    <img src="/imgs/logo.png" class="logo">
-                    <span>We're here to put a dent in the universe. Otherwise why else even be here?</span>
-                </div>
-                <div class="flex-center">
-                    <a href="mailto:fatcathello@outlook.com">
-                        <span title="envelope">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>
-                    </a>
-                    <a target="_blank" rel="noopener" href="https://github.com/lovehuiyuanai">
-                        <span title="github" style="font-size: 18px;">
-                            <i class="fa fa-github" aria-hidden="true"></i>
-                        </span>
-                    </a>
-                </div>
-            </section>
-        </div>
-    </main>
+						<div class="relate-post-cover">
+							<a href="/2024/02/19/%E5%85%AC%E5%91%8A/" title="小学留言墙">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="小学留言墙"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2024/02/17/%E4%B8%8B%E5%AD%A6%E6%9C%9F%E8%AE%A1%E5%88%92%E6%9D%A5%E5%92%AF/" title="下学期计划来咯">
+								下学期计划来咯			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 17日, 2024				
+							</p>
+							<p class="relate-post-content">
+								最近快开学了，啊计划也该定一定了。
 
-    <div class="to-top">
-    <a href="javascript: void(0)" onclick="delicate.toTop()">
-        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-    </a>
+首先，基于nanoGPT的代码，搞出ZERO-0.5、ZERO-0.5-Chat、ZERO-0.5-Code三个达到10亿参数的模型
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2024/02/17/%E4%B8%8B%E5%AD%A6%E6%9C%9F%E8%AE%A1%E5%88%92%E6%9D%A5%E5%92%AF/" title="下学期计划来咯">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="下学期计划来咯"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2024/02/03/%E6%8D%A2%E4%B8%BB%E9%A2%98%E5%95%A6%EF%BC%81/" title="换主题啦！">
+								换主题啦！			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 3日, 2024				
+							</p>
+							<p class="relate-post-content">
+								为了发一些小说同人文之类的文学性作品，我特意搞了一个背景颜色稍微对眼睛友好一点的主题，这个主题很好，就是代码块……居然没有颜色！！！我*!
+
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2024/02/03/%E6%8D%A2%E4%B8%BB%E9%A2%98%E5%95%A6%EF%BC%81/" title="换主题啦！">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="换主题啦！"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2024/02/02/XIKO%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E7%A1%AE%E5%AE%9A/" title="XIKO技术开发路线确定">
+								XIKO技术开发路线确定			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								二月 2日, 2024				
+							</p>
+							<p class="relate-post-content">
+								XIKO：为青少年最后的秘密而战！
+
+XIKO前端正式确定使用HTML、CSS开发，后端采用C++开发，数据库使用json文件。服务器正式确定使用Linux操作系统Q&amp;AQ：为什么使用C++作为后端开发语言？A：因为XIKO立...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2024/02/02/XIKO%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E7%A1%AE%E5%AE%9A/" title="XIKO技术开发路线确定">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="XIKO技术开发路线确定"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2023/09/10/%E5%86%99%E5%B0%8F%E8%AF%B4%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="写小说机器人">
+								写小说机器人			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 10日, 2023				
+							</p>
+							<p class="relate-post-content">
+								胡哲涵最新开源项目，小说大师python源码
+
+12345678                                                          声明本项目基于pytorch实现。可以自行更换训练文本...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2023/09/10/%E5%86%99%E5%B0%8F%E8%AF%B4%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="写小说机器人">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="写小说机器人"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2023/09/07/%E5%8A%A0%E5%AF%86%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BB%85%E5%8F%91%E5%B8%83%E8%80%85%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE/" title="加密博客，仅发布者可以访问">
+								加密博客，仅发布者可以访问			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 7日, 2023				
+							</p>
+							<p class="relate-post-content">
+								
+  fae7d0b5377b9f6c290dcd8adf41b25381416438debc227eee11d0ec2314c232463928add14c62c788a24a18da5f5941753b30bc6525f02b6b...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2023/09/07/%E5%8A%A0%E5%AF%86%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BB%85%E5%8F%91%E5%B8%83%E8%80%85%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE/" title="加密博客，仅发布者可以访问">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="加密博客，仅发布者可以访问"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2023/08/31/%E8%83%A1%E5%93%B2%E6%B6%B5%E5%90%8D%E8%A8%80%E7%9B%AE%E5%BD%95/" title="胡哲涵名言目录">
+								胡哲涵名言目录			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								八月 31日, 2023				
+							</p>
+							<p class="relate-post-content">
+								趁时光仍未忘记我之时，赶紧记下来。
+
+不用因为没看到晚霞愁眉苦脸，以后还会有。———《紫鲸 陆(别名风山篇第2章)》胡哲涵 著街道上的灯光是纸上跃动的墨水。———胡哲涵作文《晚上的重庆》原稿因被撕破目前只剩残缺的三分之一。所有人的名字...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2023/08/31/%E8%83%A1%E5%93%B2%E6%B6%B5%E5%90%8D%E8%A8%80%E7%9B%AE%E5%BD%95/" title="胡哲涵名言目录">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="胡哲涵名言目录"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/" title="ChatGLM的CPU推理方案">
+								ChatGLM的CPU推理方案			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								八月 20日, 2023				
+							</p>
+							<p class="relate-post-content">
+								123456from transformers import AutoTokenizer, AutoModeltokenizer = AutoTokenizer.from_pretrained(&quot;THUDM/chatglm2...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/" title="ChatGLM的CPU推理方案">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="ChatGLM的CPU推理方案"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/" title="紫鲸第一、二章">
+								紫鲸第一、二章			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								八月 15日, 2023				
+							</p>
+							<p class="relate-post-content">
+								
+  e79c3f9ca5e39251793a779759b6e1cfba6ca82f8f36e6649bf58bbb055b0ecf275024fd3780581053c4ea289fe147c86e8ef5a33d9a228a9b...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/" title="紫鲸第一、二章">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="紫鲸第一、二章"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2023/08/14/%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/" title="一些思考">
+								一些思考			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								八月 14日, 2023				
+							</p>
+							<p class="relate-post-content">
+								人的大脑运作，可以看作是一个函数系统，每个函数，都对应一个输入，产生一个输出。
+
+如果按照这个原理，编写一个用于批量处理此类函数的机器学习程序，不是几句可以仿照人脑进行思考了吗？由此，我决定在此宣布，仿人类数字系统计划，即ADSP，正...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2023/08/14/%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/" title="一些思考">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="一些思考"/>
+							</a>
+						</div>
+					</li>												
+			
+		</ul>
+	
+</div>	
+				</div>
+				<div class="investment-content-list">
+					<div class="layout-comment">
+
+	
+
+		
+
+			<!-- gitalk comment -->
+			<!-- show gitalk comment -->
+<div id="gitalk-container"></div>
+
+<!-- gitalk`s css & js -->
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<link rel="stylesheet" href="/css/comment.css">
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script type="text/javascript">
+
+	(function gitalkComment(){
+		//Thanks O-R
+		//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
+		//去除尾部匹配正则数组的字符串  
+		//Remove redundant characters
+		String.prototype.trimEnd = function(regStr) {
+			let result = this;
+			if(regStr == undefined || regStr == null || regStr == "") {
+				return result;
+			}
+			let array = regStr.split(',');
+
+			if(array.length > 0) {
+
+				let c = array.shift(), 
+					str = this,
+					i = str.length,
+					rg = new RegExp(c),
+					matchArr = str.match(rg);
+
+				if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
+					let matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
+						.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
+						.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
+						.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
+						.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
+						.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
+						.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
+						.replace(/\./g, "\\.").replace(/\&/g, "\\&");
+					matchStr = matchStr + '$';
+					result = str.replace(new RegExp(matchStr), "");
+				}
+
+				if(array.length > 0) {
+					return result.trimEnd(array.join())
+				} else {
+					return result;
+				}
+			}
+		};
+
+		//Create gitalk
+		let gitalk = new Gitalk({
+			clientID: '3717e85db9a7218445a3',
+			clientSecret: '034e968ba1aa16fd0cb1c31d61503589d69e9e1b',
+			//id: window.location.pathname,
+			//id: decodeURI(window.location.pathname),
+			//id: (window.location.pathname).split("/").pop().substring(0, 49),
+			id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
+			repo: 'Blog-gitalk',
+			owner: 'Lovehuiyuanai',
+			admin: 'Lovehuiyuanai',
+			distractionFreeMode: 'true',
+		})
+		gitalk.render('gitalk-container');		
+	})();
+</script>
+
+		
+		
+	
+
+</div>
+				</div>
+				<div class="investment-content-list">
+					<div class="layout-share">
+	
+	
+
+		
+			
+			<!-- socialShare share -->
+			<div class="social-share"></div>
+
+<!--  css & js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+			
+		
+		
+	
 </div>
 
-    <footer>
-        <div class="footer-info gray">
-    <div>
-        <span><a target="_blank" rel="noopener" href="https://github.com/can-dy-jack/hexo-theme-delicate">Delicate</a> theme designed with ❤️ by <a target="_blank" rel="noopener" href="https://github.com/can-dy-jack">can-dy-jack</a></span>
-    </div>
-    <div>
-        <span>Copyright Ⓒ 2024. All rights reserved.</span>
-    </div>
+
+				</div>
+			</div>	
+		</div>
+	</div>
 </div>
-    </footer>
 
-    
-
-
-<script src="/js/index.js"></script>
+<!-- show math formula -->
 
 
-</body>
 
+	 
+	
+<script src="/plugin/clipboard/clipboard.js"></script>
+
+	<script>
+		// Copy code !
+	    function preprocessing() {
+	        $("#article-content .highlight").each(function() {
+	            $(this).wrap('<div id="post-code"></div>');
+	        })
+
+	        $("#article-content #post-code").each(function() {
+	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
+	        })
+
+	        $("#article-content .copy-nav").each(function() {
+	            let languageClass = $(this).next().attr('class'),
+	                language = ((languageClass.length > 9) && (languageClass != null)) ? languageClass.substr(10) : "none"; //why 9? Need to check language?
+
+	            $(this).find('.code-language').text(language);
+	            $(this).append('<span class="copy-btn icon-paste"></span>');
+	        });
+	    }
+
+		function copy() {
+		    $('#article-content #post-code').each(function(i) {
+		        let codeCopyId = 'codeCopy-' + i;
+
+		        let codeNode = $(this).find('.code'),
+		            copyButton = $(this).find('.copy-btn');
+
+		        codeNode.attr('id', codeCopyId);
+		        copyButton.attr('data-clipboard-target-id', codeCopyId);
+		    })
+   
+			let clipboard = new ClipboardJS('.copy-btn', {
+					target: function(trigger) {
+						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+					}
+		      	});
+
+			//pure js
+			function showTooltip(elem, msg) {		   
+				elem.setAttribute('aria-label', msg);
+				elem.setAttribute('class', 'copy-btn icon-clipboard1');
+				setTimeout(function() {
+					elem.setAttribute('class', 'copy-btn icon-paste');
+				}, 2000);
+			}
+
+			clipboard.on('success', function(e) {
+			    e.clearSelection();
+			    console.info('Action:', e.action);		   
+			    console.info('Trigger:', e.trigger);
+			    showTooltip(e.trigger, 'Copied!');   
+			});
+			
+			clipboard.on('error', function(e) {
+			    console.error('Action:', e.action);
+			    console.error('Trigger:', e.trigger);
+			});
+		}
+		
+		(function copyCode(){
+			if ($('.layout-post').length) {
+			    preprocessing();
+			    copy();
+			} 
+		})();
+	</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+
+<script src="/plugin/fancybox/jquery.fancybox.js"></script>
+
+
+<script type="text/javascript">
+	(function gallerySet(){
+		let titleID = $('.article-title a'),
+			imageID = $('.article-content img'),
+			videoID = $('.article-content video');
+		
+		let postTitle = titleID.text() ? titleID.text() : "No post title!";
+		
+		imageID.each(function() {
+			let imgPath = $(this).attr('src'),
+				imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		
+			//给每个匹配的<img>元素打包, 即添加父元素<a>
+			$(this).wrap('<a data-fancybox="gallery" data-caption="《 ' + postTitle + ' 》' + imgTitle + '"href="' + imgPath + '"> </a>');
+		});
+		
+		videoID.each(function() {
+			let videoPath = $(this).attr('src');
+		
+			//给每个匹配的<img>元素打包, 即添加父元素<a>
+			$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
+		});
+		
+		//TODO：支持html5 video
+
+		if($('#layout-post').length) {
+			$('[data-fancybox="gallery"]').fancybox({
+				loop: true,
+				buttons: [
+					"zoom",
+					"share",
+					"slideShow",
+					"fullScreen",
+					//"download",
+					"thumbs",
+					"close"
+				],
+				protect: true
+			});
+		}
+	})();
+</script>
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div id="navigation-show">
+		<ul id="global-nav">
+	
+		<li class="menu-home">
+			<a href="/" class="menu-item-home" target="_blank">主页</a>
+		</li>
+		
+	
+		<li class="menu-archive">
+			<a href="/archives" class="menu-item-archive" target="_blank">归档</a>
+		</li>
+		
+	
+		<li class="menu-categories">
+			<a href="/categories" class="menu-item-categories" target="_blank">分类</a>
+		</li>
+		
+	
+		<li class="menu-tags">
+			<a href="/tags" class="menu-item-tags" target="_blank">标签</a>
+		</li>
+		
+	
+		<li class="menu-about">
+			<a href="/about" class="menu-item-about" target="_blank">关于</a>
+		</li>
+		
+	
+		<li class="menu-gallery">
+			<a href="/gallery" class="menu-item-gallery" target="_blank">相册</a>
+		</li>
+		
+	
+
+	
+</ul>
+	</div>
+
+	<div class="copyright">
+		<p>
+			 
+				&copy;2023 - 2024, content by SteveHu. All Rights Reserved.
+			
+			
+				<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
+			
+		</p>
+		<p>
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+
+
+			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
+			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
+		</p>
+	</div>		
+</footer>
+		
+	<!-- Local or hitokoto! -->
+
+	
+<script src="/plugin/motto/motto.js"></script>
+
+	
+	<script type="text/javascript">
+		(function motto(){
+			let mottoText = getMingYanContent().split('</br> - </br>'),
+			
+			mottoTextContent = mottoText[0]?mottoText[0]:'请刷新...',
+			
+			mottoTextFrom = mottoText[1]?mottoText[1]:'one/一个';
+			
+			mottoTextContent = mottoTextContent.trim().substring(0, 100);
+		
+			$("#motto-content").html( mottoTextContent);
+			$("#motto-author").html( mottoTextFrom  );
+		})();	
+	</script>	
+
+
+
+<!-- love effect -->
+
+
+<!-- back to top -->
+
+	<div id="totop">
+	<span class="icon-circle-up"></span>
+</div>
+
+
+
+<!-- site analysis -->
+
+
+	<!-- site-analysis -->
+	
+	
+	
+	
+	
+ 
+
+<!-- leancloud -->
+
+
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
+
+
+	
+
+  
+
+
+
+<script src="/plugin/chinese/chinese.js"></script>
+<script src="/plugin/imagelazyloader/yall.min.js"></script>
+<script src="/plugin/imageloaded/imagesloaded.pkgd.min.js"></script>
+<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
+<script src="/plugin/resizediv/resizediv.js"></script>
+<script src="/js/main.js"></script>
+
+	</body>	
 </html>
