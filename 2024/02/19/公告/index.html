@@ -230,7 +230,7 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<p>#小学留言墙<br>小胡在此感谢大家对我的包容与帮助，谢谢大家。<br>若你有想对我说的话，请在下方留言，小胡会一条一条的看的。<br>若你还想跟小胡保持联系，小胡绝对不会拒绝，以下是我的联系方式：<br>####电子邮箱  <a href="mailto:&#x31;&#x33;&#54;&#54;&#56;&#x30;&#49;&#x37;&#x33;&#x34;&#x35;&#x40;&#49;&#51;&#57;&#x2e;&#x63;&#111;&#109;">&#x31;&#x33;&#54;&#54;&#56;&#x30;&#49;&#x37;&#x33;&#x34;&#x35;&#x40;&#49;&#51;&#57;&#x2e;&#x63;&#111;&#109;</a><br>####哔哩哔哩的个人空间  <a target="_blank" rel="noopener" href="https://space.bilibili.com/1435380544">https://space.bilibili.com/1435380544</a><br>####电话  13668017345<br>最后的最后，小胡想送给大家一首自作诗，文笔可能不好，就当是小胡的心意了吧。<br>                                                                    别六年同窗<br>                                                                  落日狂风拂我心，<br>                                                                  月升寒影映远风。<br>                                                                  不知同窗笔搁处，<br>                                                                  只知相思似海深。</p>
+			<p>#小学留言墙<br>小胡在此感谢大家对我的包容与帮助，谢谢大家。<br>若你有想对我说的话，请在下方留言，小胡会一条一条的看的。<br>若你还想跟小胡保持联系，小胡绝对不会拒绝，以下是我的联系方式：<br>####电子邮箱  <a href="mailto:&#x31;&#x33;&#x36;&#54;&#56;&#x30;&#49;&#x37;&#51;&#x34;&#53;&#64;&#49;&#x33;&#57;&#x2e;&#x63;&#111;&#x6d;">&#x31;&#x33;&#x36;&#54;&#56;&#x30;&#49;&#x37;&#51;&#x34;&#53;&#64;&#49;&#x33;&#57;&#x2e;&#x63;&#111;&#x6d;</a><br>####哔哩哔哩的个人空间  <a target="_blank" rel="noopener" href="https://space.bilibili.com/1435380544">https://space.bilibili.com/1435380544</a><br>####电话  13668017345<br>最后的最后，小胡想送给大家一首自作诗，文笔可能不好，就当是小胡的心意了吧。<br>                                                                    别六年同窗<br>                                                                  落日狂风拂我心，<br>                                                                  月升寒影映远风。<br>                                                                  不知同窗笔搁处，<br>                                                                  只知相思似海深。</p>
 	
 		</div>
 		
@@ -514,81 +514,9 @@ XIKO前端正式确定使用HTML、CSS开发，后端采用C++开发，数据库
 					<div class="layout-comment">
 
 	
-
-		
-
-			<!-- gitalk comment -->
-			<!-- show gitalk comment -->
-<div id="gitalk-container"></div>
-
-<!-- gitalk`s css & js -->
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<link rel="stylesheet" href="/css/comment.css">
-<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<script type="text/javascript">
-
-	(function gitalkComment(){
-		//Thanks O-R
-		//https://github.com/gitalk/gitalk/issues/102#issuecomment-382970552
-		//去除尾部匹配正则数组的字符串  
-		//Remove redundant characters
-		String.prototype.trimEnd = function(regStr) {
-			let result = this;
-			if(regStr == undefined || regStr == null || regStr == "") {
-				return result;
-			}
-			let array = regStr.split(',');
-
-			if(array.length > 0) {
-
-				let c = array.shift(), 
-					str = this,
-					i = str.length,
-					rg = new RegExp(c),
-					matchArr = str.match(rg);
-
-				if(matchArr != undefined && matchArr != null && matchArr.length > 0) {
-					let matchStr = matchArr[0].replace(/\\/g, "\\\\").replace(/\*/g, "\\*")
-						.replace(/\+/g, "\\+").replace(/\|/g, "\\|")
-						.replace(/\{/g, "\\{").replace(/\}/g, "\\}")
-						.replace(/\(/g, "\\(").replace(/\)/g, "\\)")
-						.replace(/\^/g, "\\^").replace(/\$/g, "\\$")
-						.replace(/\[/g, "\\[").replace(/\]/g, "\\]")
-						.replace(/\?/g, "\\?").replace(/\,/g, "\\,")
-						.replace(/\./g, "\\.").replace(/\&/g, "\\&");
-					matchStr = matchStr + '$';
-					result = str.replace(new RegExp(matchStr), "");
-				}
-
-				if(array.length > 0) {
-					return result.trimEnd(array.join())
-				} else {
-					return result;
-				}
-			}
-		};
-
-		//Create gitalk
-		let gitalk = new Gitalk({
-			clientID: '3717e85db9a7218445a3',
-			clientSecret: '034e968ba1aa16fd0cb1c31d61503589d69e9e1b',
-			//id: window.location.pathname,
-			//id: decodeURI(window.location.pathname),
-			//id: (window.location.pathname).split("/").pop().substring(0, 49),
-			id: decodeURI( md5( location.href.trimEnd('#.*$,\\?.*$,index.html$') ) ),
-			repo: 'Blog-gitalk',
-			owner: 'Lovehuiyuanai',
-			admin: 'Lovehuiyuanai',
-			distractionFreeMode: 'true',
-		})
-		gitalk.render('gitalk-container');		
-	})();
-</script>
-
-		
-		
+		<div class="config-info">
+			Please check the parameter of <b>comment</b> in config.yml of hexo-theme-Annie!
+		</div>	
 	
 
 </div>
