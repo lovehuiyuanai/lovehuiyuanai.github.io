@@ -155,6 +155,10 @@
 	
 
 	
+		<li class="menu-search">
+			<a href="javascript:;" class="popup-trigger">搜索</a>
+		</li>
+	
 </ul>
 	</div>
 	
@@ -192,7 +196,7 @@
 -->
 
 	
-	总计 17 文章
+	总计 18 文章
 	
 
 		</i>
@@ -207,12 +211,40 @@
         <ul>
             
                 <li>
-                    <a href="/2024/02/19/%E5%85%AC%E5%91%8A/">
+                    <a href="/2024/02/21/%E5%8F%8D%E6%80%9D/">
+            			<em year="2024">
+                            02-21
+                        </em>
+        			    <span itemprop="name">
+                            反思
+                        </span>
+        			    
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/2024/02/21/%E6%96%B0%E7%9A%84%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/">
+            			<em year="2024">
+                            02-21
+                        </em>
+        			    <span itemprop="name">
+                            新的测试博客
+                        </span>
+        			    
+                			<a href="/tags/%E4%B8%BB%E9%A2%98%E6%B5%8B%E8%AF%95/" class="tag">
+                				主题测试
+                			</a>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/2024/02/19/%E6%96%B0%E4%B8%BB%E9%A2%98%E4%BB%A3%E7%A0%81%E5%9D%97%E6%B5%8B%E8%AF%95/">
             			<em year="2024">
                             02-19
                         </em>
         			    <span itemprop="name">
-                            小学留言墙
+                            新主题代码块测试
                         </span>
         			    
                     </a>
@@ -225,18 +257,6 @@
                         </em>
         			    <span itemprop="name">
                             下学期计划来咯
-                        </span>
-        			    
-                    </a>
-                </li>
-            
-                <li>
-                    <a href="/2024/02/03/%E6%8D%A2%E4%B8%BB%E9%A2%98%E5%95%A6%EF%BC%81/">
-            			<em year="2024">
-                            02-03
-                        </em>
-        			    <span itemprop="name">
-                            换主题啦！
                         </span>
         			    
                     </a>
@@ -451,6 +471,24 @@
 
             <ul>
                 <li>
+                    <a href="/2023/08/14/%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/">
+                        <em>
+                            08-14
+                        </em>
+                        <span itemprop="name">
+                            一些思考
+                        </span>
+                               
+                    </a>
+                </li>
+            </ul>
+        
+            
+
+            
+
+            <ul>
+                <li>
                     <a href="/2023/08/14/%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/">
                         <em>
                             08-14
@@ -626,6 +664,10 @@
 	
 
 	
+		<li class="menu-search">
+			<a href="javascript:;" class="popup-trigger">搜索</a>
+		</li>
+	
 </ul>
 	</div>
 
@@ -723,6 +765,56 @@
 	
 
   
+
+	<!--
+	时间：2018-10-3
+	描述：
+		插件名称：hexo-generator-search-zip
+		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
+		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
+-->
+<div class="popup search-popup local-search-popup scrollbar" >
+	<div class="local-search-container">
+		<span class="popup-btn-close">
+      		ESC
+   		</span>
+		<div class="local-search-header">
+			<div class="input-prompt">				
+			</div>
+			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
+		</div>
+		<div class="local-search-body">
+			<div id="local-search-output"></div>
+		</div>
+		<div class="local-search-footer">
+			<div class="topN-post">				
+				
+								
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script src="/plugin/search/ziploader.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script type="text/javascript">
+	var search_path = 'search.json',
+		zip_Path = '/search.zip',
+		version_Path = '/searchVersion.txt',
+		input_Trigger = 'auto',
+		top_N = '2';
+
+	themeLocalSearch({
+		search_path, 
+		zip_Path, 
+		version_Path, 
+		input_Trigger, 
+		top_N
+	});
+</script>
 
 
 

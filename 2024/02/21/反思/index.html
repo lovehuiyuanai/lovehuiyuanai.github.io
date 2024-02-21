@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      写小说机器人 | Steve Hu的博客
+      反思 | Steve Hu的博客
     
   </title>
   <meta name="author" content="Steve Hu">
@@ -100,7 +100,7 @@
 	<!-- Page title -->
 	<p>
 		
-			「写小说机器人」
+			「反思」
 		
 	</p>
 
@@ -197,8 +197,8 @@
 	<div id="layout-post">
 		<div class="article-title">
 			
-	<a href="/2023/09/10/%E5%86%99%E5%B0%8F%E8%AF%B4%E6%9C%BA%E5%99%A8%E4%BA%BA/" itemprop="url">
-		写小说机器人
+	<a href="/2024/02/21/%E5%8F%8D%E6%80%9D/" itemprop="url">
+		反思
 	</a>
 
 		</div>
@@ -214,9 +214,9 @@
 
 	更新于
 
-	<a href="/2023/09/10/%E5%86%99%E5%B0%8F%E8%AF%B4%E6%9C%BA%E5%99%A8%E4%BA%BA/" itemprop="url">
-		<time datetime="2023-09-10T07:05:13.000Z" itemprop="dateUpdated">
-	  		2023-09-10
+	<a href="/2024/02/21/%E5%8F%8D%E6%80%9D/" itemprop="url">
+		<time datetime="2024-02-21T11:52:12.000Z" itemprop="dateUpdated">
+	  		2024-02-21
 	  </time>
 	</a> 
 
@@ -234,38 +234,8 @@
 		</div>
 
 		<div class="article-content" id="article-content">
-			<p>胡哲涵最新开源项目，小说大师python源码</p>
-<span id="more"></span>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">                                                          声明</span></span><br><span class="line"><span class="code">本项目基于pytorch实现。可以自行更换训练文本，但请记住：训练文本一定一定得是TXT格式！！！</span></span><br><span class="line"><span class="code">另外，本项目仅用作学习交流，严禁用于商用、参加任何形式以及团体组织的比赛，请使用者严格遵守Apache License Version 开源协议</span></span><br><span class="line"><span class="code">作者不承担此程序造成的一切后果与责任。</span></span><br><span class="line"><span class="code">版权归作者重庆市小学生胡哲涵所有，Github likehuiyuanai。</span></span><br><span class="line"><span class="code">PS：最近喜欢看某科学的超电磁炮，所以实例代码用的是日本轻小说《魔法禁书目录》作为训练数据，暂拒绝公开此数据集（你可以自己整理，字数多亿些训练效果好点</span></span><br><span class="line"><span class="code">本博客（帖子）的版权也同样归胡哲涵所有，严禁转发或参加比赛！</span></span><br><span class="line"><span class="code">低调！低调！低调！</span></span><br></pre></td></tr></table></figure>
-<p>正式开始（暂时没有开发代码生成器的意向，毕竟我不喜欢。没有bug的代码等同于人失去了灵魂！）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> scipy.sparse <span class="keyword">import</span> csr_matrix</span><br><span class="line"><span class="keyword">from</span> tensorboardX <span class="keyword">import</span> SummaryWriter</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
-<p>导入库，幼儿园都学过吧。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./mfjsml.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.readlines()</span><br></pre></td></tr></table></figure>
-<p>读取数据集，mfjsml这个名字可以改，但数据集和jupyter lab代码放一个文件夹下！</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data=<span class="string">&#x27;&#x27;</span>.join(data)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(data[:<span class="number">100</span>])</span><br></pre></td></tr></table></figure>
-<p>展示数据集的一部分</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chars = <span class="built_in">list</span>(<span class="built_in">set</span>(data))</span><br><span class="line">data_size, vocab_size = <span class="built_in">len</span>(data), <span class="built_in">len</span>(chars)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;data has <span class="subst">&#123;data_size&#125;</span> characters, <span class="subst">&#123;vocab_size&#125;</span> unique.&#x27;</span>)</span><br><span class="line">char_to_ix = &#123; ch:i <span class="keyword">for</span> i,ch <span class="keyword">in</span> <span class="built_in">enumerate</span>(chars) &#125;</span><br><span class="line">ix_to_char = &#123; i:ch <span class="keyword">for</span> i,ch <span class="keyword">in</span> <span class="built_in">enumerate</span>(chars) &#125;</span><br></pre></td></tr></table></figure>
-<p>接下来我们开始构建LSTM模型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X_train = csr_matrix((<span class="built_in">len</span>(data), <span class="built_in">len</span>(chars)), dtype=np.<span class="built_in">int</span>)</span><br><span class="line">char_id = np.array([chars.index(c) <span class="keyword">for</span> c <span class="keyword">in</span> data])</span><br><span class="line">X_train[np.arange(<span class="built_in">len</span>(data)), char_id] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_train = np.roll(char_id,-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train.shape</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y_train.shape</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_batch</span>(<span class="params">X_train, y_train, seq_length</span>):</span><br><span class="line">    X = X_train</span><br><span class="line">    <span class="comment">#X = torch.from_numpy(X_train).float()</span></span><br><span class="line">    y = torch.from_numpy(y_train).long()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(y), seq_length):   </span><br><span class="line">        id_stop = i+seq_length <span class="keyword">if</span> i+seq_length &lt; <span class="built_in">len</span>(y) <span class="keyword">else</span> <span class="built_in">len</span>(y)</span><br><span class="line">        <span class="keyword">yield</span>([torch.from_numpy(X[i:id_stop].toarray().astype(np.float32)), </span><br><span class="line">               y[i:id_stop]])</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sample_chars</span>(<span class="params">rnn, X_seed, h_prev, length=<span class="number">20</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;Generate text using trained model&#x27;&#x27;&#x27;</span></span><br><span class="line">    X_next = X_seed</span><br><span class="line">    results = []</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(length):        </span><br><span class="line">            y_score, h_prev = rnn(X_next.view(<span class="number">1</span>,<span class="number">1</span>,-<span class="number">1</span>), h_prev)</span><br><span class="line">            y_prob = nn.Softmax(<span class="number">0</span>)(y_score.view(-<span class="number">1</span>)).detach().numpy()</span><br><span class="line">            y_pred = np.random.choice(chars,<span class="number">1</span>, p=y_prob).item()</span><br><span class="line">            results.append(y_pred)</span><br><span class="line">            X_next = torch.zeros_like(X_seed)</span><br><span class="line">            X_next[chars.index(y_pred)] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(results)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">nn_LSTM</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, input_size, hidden_size, output_size</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.hidden_size = hidden_size</span><br><span class="line">        self.lstm = nn.LSTM(input_size, hidden_size)</span><br><span class="line">        self.out = nn.Linear(hidden_size, output_size)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, X, hidden</span>):</span><br><span class="line">        _, hidden = self.lstm(X, hidden)</span><br><span class="line">        output = self.out(hidden[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> output, hidden</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">initHidden</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> (torch.zeros(<span class="number">1</span>, <span class="number">1</span>, self.hidden_size),</span><br><span class="line">                torch.zeros(<span class="number">1</span>, <span class="number">1</span>, self.hidden_size)</span><br><span class="line">               )</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hidden_size = <span class="number">256</span></span><br><span class="line">seq_length = <span class="number">25</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rnn = nn_LSTM(vocab_size, hidden_size, vocab_size)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">loss_fn = nn.CrossEntropyLoss()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">optimizer = torch.optim.Adam(rnn.parameters(), lr=<span class="number">0.005</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">X_batch, y_batch</span>):</span><br><span class="line">    h_prev = rnn.initHidden()</span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    batch_loss = torch.tensor(<span class="number">0</span>, dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(X_batch)):</span><br><span class="line">        y_score, h_prev = rnn(X_batch[i].view(<span class="number">1</span>,<span class="number">1</span>,-<span class="number">1</span>), h_prev)</span><br><span class="line">        loss = loss_fn(y_score.view(<span class="number">1</span>,-<span class="number">1</span>), y_batch[i].view(<span class="number">1</span>))</span><br><span class="line">        batch_loss += loss</span><br><span class="line">    batch_loss.backward()</span><br><span class="line">    optimizer.step()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> y_score, batch_loss/<span class="built_in">len</span>(X_batch)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">writer = SummaryWriter(<span class="string">f&#x27;logs/lstm1_<span class="subst">&#123;time.strftime(<span class="string">&quot;%Y%m%d-%H%M%S&quot;</span>)&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>准备好了吗？所有CUDA&#x2F;Tensor核心全部启动启动还有这个，启动训练！</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">all_losses = []</span><br><span class="line">print_every = <span class="number">100</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>):    </span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> get_batch(X_train, y_train, seq_length):</span><br><span class="line">        X_batch, y_batch = batch</span><br><span class="line">        _, batch_loss = train(X_batch, y_batch)</span><br><span class="line">        all_losses.append(batch_loss.item())</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(all_losses)%print_every==<span class="number">1</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&#x27;----\n训练正在进行，请耐心等待 Loss:<span class="subst">&#123;np.mean(all_losses[-print_every:])&#125;</span> at iter: <span class="subst">&#123;<span class="built_in">len</span>(all_losses)&#125;</span>\n----&#x27;</span>)</span><br><span class="line">            <span class="comment"># log to tensorboard every X iterations. Can be removed if Tensorboard is not installed.</span></span><br><span class="line">            writer.add_scalar(<span class="string">&#x27;loss&#x27;</span>, np.mean(all_losses[-<span class="number">100</span>:]), <span class="built_in">len</span>(all_losses))</span><br><span class="line">            <span class="comment"># generate text every X iterations</span></span><br><span class="line">            <span class="built_in">print</span>(sample_chars(rnn, X_batch[<span class="number">0</span>], rnn.initHidden(), <span class="number">200</span>))</span><br></pre></td></tr></table></figure>
-<p>终于可以启动生成器了</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(sample_chars(rnn, X_batch[<span class="number">20</span>], rnn.initHidden(), <span class="number">200</span>))</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(rnn.state_dict(), <span class="string">&#x27;one.pth&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p>把模型存着。你自己训练的模型你自己可以随便搞，作者对此没有版权和责任<br>另外，推荐大家去看看某科学的超电磁炮，特别好看！要联系的去我的主页加我邮箱</p>
+			<blockquote class="colorquote danger"><p>一下均为本人反思内容</p></blockquote>    
+<p>这个博客从8月发布以来，我一直在上面发了一些无关紧要的东西，主要是因为迫于时间问题。<br>我觉得我现在完全处于一个”未醒”的状态，即无法对现实世界进行反馈，只能一味的接受。例如我现在上这个信息技术<br>奥利匹克竞赛的课，简直我自己都要服了我自己了，难搞啊！前几天那么简单的二维数组的题搞了几天！我去，我在状态的话这几个题那还不是两三个小时的事？<br>还有就是学习，开学一周了，总是感觉信息的反馈处理能力有所下滑，接受储存还是绰绰有余的，讲的生字故事课文都<br>能记得住。但是文笔和阅读理解能力真的大不如以往了<br>所以，我现在必须得”醒来”，即注重对现实世界的反馈，还有练习阅读。总重要的是把以前落下的竞赛重新拾起来。<br>除此之外，说点高兴的。<br>博客更新到2.6版本，换上了新的Annie主题，加上了搜索功能。(顺带说一句，我太喜欢这个主题的代码块了，哇哇哇…)<br>还有，最近终于在计算机GPU上跑起来了一个Diffusion模型，挺开心的。<br>其他就没了，小学最后一学期了，还是加把劲给自己的小学生涯画上一个圆满的句号吧。</p>
 	
 		</div>
 		
@@ -284,12 +254,8 @@
 	<span>
 		<a id="totop-post-page">返回顶部</a>
 		
-			<a href="/2024/02/02/XIKO%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E7%A1%AE%E5%AE%9A/" title="XIKO技术开发路线确定" rel="prev">
-				&laquo;上一篇
-			</a>
 		
-		
-			<a href="/2023/09/07/%E5%8A%A0%E5%AF%86%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BB%85%E5%8F%91%E5%B8%83%E8%80%85%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE/" title="加密博客，仅发布者可以访问" rel="next">
+			<a href="/2024/02/21/%E6%96%B0%E7%9A%84%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/" title="新的测试博客" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -307,29 +273,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2024/02/21/%E5%8F%8D%E6%80%9D/" title="反思">
-								反思			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								二月 21日, 2024				
-							</p>
-							<p class="relate-post-content">
-								一下均为本人反思内容    
-这个博客从8月发布以来，我一直在上面发了一些无关紧要的东西，主要是因为迫于时间问题。我觉得我现在完全处于一个”未醒”的状态，即无法对现实世界进行反馈，只能一味的接受。例如我现在上这个信息技术奥利匹克竞赛的...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2024/02/21/%E5%8F%8D%E6%80%9D/" title="反思">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="反思"/>
-							</a>
-						</div>
-					</li>												
 			
 					<li>
 						<div class="relate-post-text">
@@ -427,6 +370,30 @@ XIKO前端正式确定使用HTML、CSS开发，后端采用C++开发，数据库
 							<a href="/2024/02/02/XIKO%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E7%A1%AE%E5%AE%9A/" title="XIKO技术开发路线确定">				
 								
 								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="XIKO技术开发路线确定"/>
+							</a>
+						</div>
+					</li>												
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/2023/09/10/%E5%86%99%E5%B0%8F%E8%AF%B4%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="写小说机器人">
+								写小说机器人			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								九月 10日, 2023				
+							</p>
+							<p class="relate-post-content">
+								胡哲涵最新开源项目，小说大师python源码
+
+12345678                                                          声明本项目基于pytorch实现。可以自行更换训练文本...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/2023/09/10/%E5%86%99%E5%B0%8F%E8%AF%B4%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="写小说机器人">				
+								
+								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="写小说机器人"/>
 							</a>
 						</div>
 					</li>												
