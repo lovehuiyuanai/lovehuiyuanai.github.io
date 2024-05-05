@@ -1,883 +1,321 @@
-<!--
-	作者：Sariay
-	时间：2018-08-26
-	描述：There may be a bug, but don't worry, Qiling(器灵) says that it can work normally! aha!
--->
 <!DOCTYPE html>
-<html class="html-loading">
-		
-
+<html lang="zh-CN">
 <head>
-	<meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <title>
-    
-      ChatGLM的CPU推理方案 | Steve Hu的博客
-    
-  </title>
-  <meta name="author" content="Steve Hu">
-  <meta name="keywords" content="" />
-  <meta name="description" content="最爱哀酱！" />
-	<!-- favicon -->
-  <link rel="shortcut icon" href="/img/favicon.ico">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
 
-  <!-- css -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lovehuiyuanai.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="123456from transformers import AutoTokenizer, AutoModeltokenizer &#x3D; AutoTokenizer.from_pretrained(&quot;THUDM&#x2F;chatglm2-6b-int4&quot;, trust_remote_code&#x3D;True)model &#x3D; AutoModel.from_pretrained(&quot;THUD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ChatGLM的CPU推理方案">
+<meta property="og:url" content="https://lovehuiyuanai.github.io/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="Steve Hu的博客">
+<meta property="og:description" content="123456from transformers import AutoTokenizer, AutoModeltokenizer &#x3D; AutoTokenizer.from_pretrained(&quot;THUDM&#x2F;chatglm2-6b-int4&quot;, trust_remote_code&#x3D;True)model &#x3D; AutoModel.from_pretrained(&quot;THUD">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-20T11:12:07.000Z">
+<meta property="article:modified_time" content="2023-08-20T11:16:43.221Z">
+<meta property="article:author" content="Steve Hu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://lovehuiyuanai.github.io/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lovehuiyuanai.github.io/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/","path":"2023/08/20/ChatGLM的CPU推理方案/","title":"ChatGLM的CPU推理方案"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ChatGLM的CPU推理方案 | Steve Hu的博客</title>
   
-<link rel="stylesheet" href="/css/Annie.css">
-
-  
-  <!-- jquery -->
-	
-<script src="/plugin/jquery/jquery.min.js"></script>
 
 
-<script>
-    const CONFIG_BGIMAGE = {
-      mode: 'normal',
-      normalSrc: '/img/header-bg.jpg',
-      randomYouMax: 110,
-      randomYouSrc: 'https://sariay.github.io/Random-img/',
-	  randomOtherSrc: 'https://api.berryapi.net/?service=App.Bing.Images&day=-0',
-	  preloaderEnable: false
-    }
-	
-    const CONFIG_LEACLOUD_COUNT = {
-      enable: false,
-	  appId: 'AU8...',
-	  appKey: '4cU...',
-	  serverURLs: 'http' || ' '
-    }
-  </script>
-<meta name="generator" content="Hexo 6.3.0"></head>
-	<body>
-		<!-- Preloader -->
 
 
-<!-- header -->
-<header class="fixbackground bg-pan-br">
-	<div class="mask">
-		<!-- motto -->
-		<div class="h-body">	
-			
-				<div class="motto text-shadow-pop-left">
-					<p class="content" id="motto-content">获取中...</p>
-					<p>-<p>
-					<p class="author" id="motto-author">Just a minute...</p>
-				</div>
-			
-		</div>
-		
-		<!-- others: such as time... -->			
-		<div class="h-footer">
-			<a href="javascript:;" id="read-more" class="scroll-down">
-				<span class="icon-anchor1 animation-scroll-down"></span>
-			</a>
-		</div>
-	</div>
-</header>
 
-<div id="navigation-hide">
-	<!-- Progress bar -->
-	<div id="progress-bar"></div>
 
-	<!-- Progress percent -->
-	<div id="progress-percentage"><span>0.0%</span></div>
 
-	<div class="toc-switch"><span class="switch-button">目录</span></div>
 
-	<!-- Page title -->
-	<p>
-		
-			「ChatGLM的CPU推理方案」
-		
-	</p>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-	
-	
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-	<!-- Nav trigger for navigation-H-->
-	<a class="nav-trigger"><span></span></a>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Steve Hu的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">最爱哀酱！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
 </div>
 
-<!-- Navigation in div(id="navigation-H") -->
-<nav class="nav-container" id="cd-nav">
-	<div class="nav-header">
-		<span class="logo"> 
-			<img src="/img/logo.png">
-		</span>
-		<a href="javascript:;" class="nav-close"></a>
-	</div>
-	
-	<div class="nav-body">
-		<ul id="global-nav">
-	
-		<li class="menu-home">
-			<a href="/" class="menu-item-home" target="_blank">主页</a>
-		</li>
-		
-	
-		<li class="menu-archive">
-			<a href="/archives" class="menu-item-archive" target="_blank">归档</a>
-		</li>
-		
-	
-		<li class="menu-categories">
-			<a href="/categories" class="menu-item-categories" target="_blank">分类</a>
-		</li>
-		
-	
-		<li class="menu-tags">
-			<a href="/tags" class="menu-item-tags" target="_blank">标签</a>
-		</li>
-		
-	
-		<li class="menu-about">
-			<a href="/about" class="menu-item-about" target="_blank">关于</a>
-		</li>
-		
-	
-		<li class="menu-gallery">
-			<a href="/gallery" class="menu-item-gallery" target="_blank">相册</a>
-		</li>
-		
-	
 
-	
-		<li class="menu-search">
-			<a href="javascript:;" class="popup-trigger">搜索</a>
-		</li>
-	
-</ul>
-	</div>
-	
-	<div class="nav-footer">
-		<ul id="global-social">
-	
-		<li>
-			<a href="http://github.com/" target="_blank">
-				<span class="icon-github"></span>
-			</a>
-		</li>
-	
-		<li>
-			<a href="/atom.xml" target="_blank">
-				<span class="icon-rss"></span>
-			</a>
-		</li>
-			
-</ul>
 
-	</div>
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
-			
-		<!--main-->
-		<main>
-			<!--
-	时间：2018-11-17
-	描述：
-		插件名称：katelog.min.js
-		插件作者：KELEN
-		插件来源: https://github.com/KELEN/katelog
--->
-	 
-
-<div class="layout-post">
-	<div id="layout-post">
-		<div class="article-title">
-			
-	<a href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/" itemprop="url">
-		ChatGLM的CPU推理方案
-	</a>
-
-		</div>
-
-		<div class="article-meta">
-			<span>
-				<i class="icon-calendar1"></i>
-				
-				
 
 
 
-
-	更新于
-
-	<a href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/" itemprop="url">
-		<time datetime="2023-08-20T11:12:07.000Z" itemprop="dateUpdated">
-	  		2023-08-20
-	  </time>
-	</a> 
-
-
-
-			</span>
-			<span>
-						
-			</span>
-			
-			
-
-
-
-		</div>
-
-		<div class="article-content" id="article-content">
-			<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer, AutoModel</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>)</span><br><span class="line">model = AutoModel.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>).half().<span class="built_in">float</span>()</span><br><span class="line">model = model.<span class="built_in">eval</span>()</span><br><span class="line">response, history = model.chat(tokenizer, <span class="string">&quot;写一首赞美雪的现代诗&quot;</span>, history=[])</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
-	
-		</div>
-		
-		<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
-
-		<!-- relate post, comment...-->
-		<div class="investment-container">
-			<div class="investment-header">
-				<div class="investment-title-1">
-					<div class="on">相关文章</div>
-					<div>评论</div>
-					<div>分享</div>
-				</div>
-				<div class="investment-title-2">	            
-					
-	<span>
-		<a id="totop-post-page">返回顶部</a>
-		
-			<a href="/2023/08/23/%E4%B8%B8%E4%BB%94/" title="丸仔" rel="prev">
-				&laquo;上一篇
-			</a>
-		
-		
-			<a href="/2023/08/17/%E7%99%BD%E5%BC%80%E6%B0%B4/" title="白开水" rel="next">
-				下一篇&raquo;
-			</a>
-			
-	</span>
-
-
-      		
-				</div>	
-			</div>
-			
-			<div class="investment-content">
-				<div class="investment-content-list">
-					
-
-<div class="relate-post">
-	
-		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2024/03/24/XIKOTODAY%E6%AD%A3%E5%BC%8F%E5%90%AF%E7%94%A8python%E5%90%8E%E7%AB%AF/" title="XIKOTODAY正式启用python后端">
-								XIKOTODAY正式启用python后端			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 24日, 2024				
-							</p>
-							<p class="relate-post-content">
-								哈哈哈哈……
-我真是服了我自己了，两个文件夹的urls写成一个去了，反复导入
-Django:大哥，你这怎么重复导入urls文件啊
-我:什么？***！
-总之以后注意吧
-
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2024/03/24/XIKOTODAY%E6%AD%A3%E5%BC%8F%E5%90%AF%E7%94%A8python%E5%90%8E%E7%AB%AF/" title="XIKOTODAY正式启用python后端">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="XIKOTODAY正式启用python后端"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2024/03/09/2024%E5%B9%B4%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92/" title="2024年的一些计划">
-								2024年的一些计划			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								三月 9日, 2024				
-							</p>
-							<p class="relate-post-content">
-								XIKO正如你所见，XIKO
-
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2024/03/09/2024%E5%B9%B4%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%A1%E5%88%92/" title="2024年的一些计划">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="2024年的一些计划"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2024/02/21/%E5%8F%8D%E6%80%9D/" title="反思">
-								反思			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								二月 21日, 2024				
-							</p>
-							<p class="relate-post-content">
-								一下均为本人反思内容    
-这个博客从8月发布以来，我一直在上面发了一些无关紧要的东西，主要是因为迫于时间问题。我觉得我现在完全处于一个”未醒”的状态，即无法对现实世界进行反馈，只能一味的接受。例如我现在上这个信息技术奥利匹克竞赛的...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2024/02/21/%E5%8F%8D%E6%80%9D/" title="反思">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="反思"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2024/02/21/%E6%96%B0%E7%9A%84%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/" title="新的测试博客">
-								新的测试博客			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								二月 21日, 2024				
-							</p>
-							<p class="relate-post-content">
-								测试标签
-content
-[author[source]] [link] [source_link_title]
-
-这是一个普通的引用！我说不清楚为什么，你遇见过千百个人，而他们只不过是匆匆过客。
-
-
-这是一个书上句子的引用！人面不知...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2024/02/21/%E6%96%B0%E7%9A%84%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/" title="新的测试博客">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="新的测试博客"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2024/02/19/%E6%96%B0%E4%B8%BB%E9%A2%98%E4%BB%A3%E7%A0%81%E5%9D%97%E6%B5%8B%E8%AF%95/" title="新主题代码块测试">
-								新主题代码块测试			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								二月 19日, 2024				
-							</p>
-							<p class="relate-post-content">
-								123456789101112131415161718192021import tensorflow as tfmnist = tf.keras.datasets.mnist(x_train, y_train), (x_test, y...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2024/02/19/%E6%96%B0%E4%B8%BB%E9%A2%98%E4%BB%A3%E7%A0%81%E5%9D%97%E6%B5%8B%E8%AF%95/" title="新主题代码块测试">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="新主题代码块测试"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2024/02/17/%E4%B8%8B%E5%AD%A6%E6%9C%9F%E8%AE%A1%E5%88%92%E6%9D%A5%E5%92%AF/" title="下学期计划来咯">
-								下学期计划来咯			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								二月 17日, 2024				
-							</p>
-							<p class="relate-post-content">
-								最近快开学了，啊计划也该定一定了。
-
-首先，基于nanoGPT的代码，搞出ZERO-0.5、ZERO-0.5-Chat、ZERO-0.5-Code三个达到10亿参数的模型
-
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2024/02/17/%E4%B8%8B%E5%AD%A6%E6%9C%9F%E8%AE%A1%E5%88%92%E6%9D%A5%E5%92%AF/" title="下学期计划来咯">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="下学期计划来咯"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2024/02/02/XIKO%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E7%A1%AE%E5%AE%9A/" title="XIKO技术开发路线确定">
-								XIKO技术开发路线确定			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								二月 2日, 2024				
-							</p>
-							<p class="relate-post-content">
-								XIKO：为青少年最后的秘密而战！
-
-XIKO前端正式确定使用HTML、CSS开发，后端采用C++开发，数据库使用json文件。服务器正式确定使用Linux操作系统Q&amp;AQ：为什么使用C++作为后端开发语言？A：因为XIKO立...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2024/02/02/XIKO%E6%8A%80%E6%9C%AF%E5%BC%80%E5%8F%91%E8%B7%AF%E7%BA%BF%E7%A1%AE%E5%AE%9A/" title="XIKO技术开发路线确定">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="XIKO技术开发路线确定"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2023/09/10/%E5%86%99%E5%B0%8F%E8%AF%B4%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="写小说机器人">
-								写小说机器人			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 10日, 2023				
-							</p>
-							<p class="relate-post-content">
-								胡哲涵最新开源项目，小说大师python源码
-
-12345678                                                          声明本项目基于pytorch实现。可以自行更换训练文本...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2023/09/10/%E5%86%99%E5%B0%8F%E8%AF%B4%E6%9C%BA%E5%99%A8%E4%BA%BA/" title="写小说机器人">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="写小说机器人"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2023/09/07/%E5%8A%A0%E5%AF%86%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BB%85%E5%8F%91%E5%B8%83%E8%80%85%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE/" title="加密博客，仅发布者可以访问">
-								加密博客，仅发布者可以访问			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								九月 7日, 2023				
-							</p>
-							<p class="relate-post-content">
-								
-  fae7d0b5377b9f6c290dcd8adf41b25381416438debc227eee11d0ec2314c232463928add14c62c788a24a18da5f5941753b30bc6525f02b6b...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2023/09/07/%E5%8A%A0%E5%AF%86%E5%8D%9A%E5%AE%A2%EF%BC%8C%E4%BB%85%E5%8F%91%E5%B8%83%E8%80%85%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE/" title="加密博客，仅发布者可以访问">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="加密博客，仅发布者可以访问"/>
-							</a>
-						</div>
-					</li>												
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/2023/08/31/%E8%83%A1%E5%93%B2%E6%B6%B5%E5%90%8D%E8%A8%80%E7%9B%AE%E5%BD%95/" title="胡哲涵名言目录">
-								胡哲涵名言目录			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								八月 31日, 2023				
-							</p>
-							<p class="relate-post-content">
-								趁时光仍未忘记我之时，赶紧记下来。
-
-不用因为没看到晚霞愁眉苦脸，以后还会有。———《紫鲸 陆(别名风山篇第2章)》胡哲涵 著街道上的灯光是纸上跃动的墨水。———胡哲涵作文《晚上的重庆》原稿因被撕破目前只剩残缺的三分之一。所有人的名字...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/2023/08/31/%E8%83%A1%E5%93%B2%E6%B6%B5%E5%90%8D%E8%A8%80%E7%9B%AE%E5%BD%95/" title="胡哲涵名言目录">				
-								
-								<img class="lazy" src="/img/lazy.gif" data-src="/img/cart_cover.jpg" alt="胡哲涵名言目录"/>
-							</a>
-						</div>
-					</li>												
-			
-		</ul>
-	
-</div>	
-				</div>
-				<div class="investment-content-list">
-					<div class="layout-comment">
-
-	
-		<div class="config-info">
-			Please check the parameter of <b>comment</b> in config.yml of hexo-theme-Annie!
-		</div>	
-	
-
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
 </div>
-				</div>
-				<div class="investment-content-list">
-					<div class="layout-share">
-	
-	
-
-		
-			
-			<!-- socialShare share -->
-			<div class="social-share"></div>
-
-<!--  css & js -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script async src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
-			
-		
-		
-	
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
 </div>
 
+    </div>
+  </div>
 
-				</div>
-			</div>	
-		</div>
-	</div>
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Steve Hu"
+      src="https://cdn.luogu.com.cn/upload/image_hosting/bq1h7111.png">
+  <p class="site-author-name" itemprop="name">Steve Hu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
 </div>
 
-<!-- show math formula -->
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
 
 
+    </div>
 
-	 
-	
-<script src="/plugin/clipboard/clipboard.js"></script>
+    <div class="main-inner post posts-expand">
 
-	<script>
-		// Copy code !
-	    function preprocessing() {
-	        $("#article-content .highlight").each(function() {
-	            $(this).wrap('<div id="post-code"></div>');
-	        })
-
-	        $("#article-content #post-code").each(function() {
-	            $(this).prepend('<nav class="copy-nav"><span><i class="code-language"></i></span></nav>');
-	        })
-
-	        $("#article-content .copy-nav").each(function() {
-	            let languageClass = $(this).next().attr('class'),
-	                language = ((languageClass.length > 9) && (languageClass != null)) ? languageClass.substr(10) : "none"; //why 9? Need to check language?
-
-	            $(this).find('.code-language').text(language);
-	            $(this).append('<span class="copy-btn icon-paste"></span>');
-	        });
-	    }
-
-		function copy() {
-		    $('#article-content #post-code').each(function(i) {
-		        let codeCopyId = 'codeCopy-' + i;
-
-		        let codeNode = $(this).find('.code'),
-		            copyButton = $(this).find('.copy-btn');
-
-		        codeNode.attr('id', codeCopyId);
-		        copyButton.attr('data-clipboard-target-id', codeCopyId);
-		    })
-   
-			let clipboard = new ClipboardJS('.copy-btn', {
-					target: function(trigger) {
-						return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
-					}
-		      	});
-
-			//pure js
-			function showTooltip(elem, msg) {		   
-				elem.setAttribute('aria-label', msg);
-				elem.setAttribute('class', 'copy-btn icon-clipboard1');
-				setTimeout(function() {
-					elem.setAttribute('class', 'copy-btn icon-paste');
-				}, 2000);
-			}
-
-			clipboard.on('success', function(e) {
-			    e.clearSelection();
-			    console.info('Action:', e.action);		   
-			    console.info('Trigger:', e.trigger);
-			    showTooltip(e.trigger, 'Copied!');   
-			});
-			
-			clipboard.on('error', function(e) {
-			    console.error('Action:', e.action);
-			    console.error('Trigger:', e.trigger);
-			});
-		}
-		
-		(function copyCode(){
-			if ($('.layout-post').length) {
-			    preprocessing();
-			    copy();
-			} 
-		})();
-	</script>
-
-
-
-
-
-
-<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
-
-
-<script src="/plugin/fancybox/jquery.fancybox.js"></script>
-
-
-<script type="text/javascript">
-	(function gallerySet(){
-		let titleID = $('.article-title a'),
-			imageID = $('.article-content img'),
-			videoID = $('.article-content video');
-		
-		let postTitle = titleID.text() ? titleID.text() : "No post title!";
-		
-		imageID.each(function() {
-			let imgPath = $(this).attr('src'),
-				imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
-		
-			//给每个匹配的<img>元素打包, 即添加父元素<a>
-			$(this).wrap('<a data-fancybox="gallery" data-caption="《 ' + postTitle + ' 》' + imgTitle + '"href="' + imgPath + '"> </a>');
-		});
-		
-		videoID.each(function() {
-			let videoPath = $(this).attr('src');
-		
-			//给每个匹配的<img>元素打包, 即添加父元素<a>
-			$(this).wrap('<a data-fancybox href=" ' + videoPath + ' "> </a>');
-		});
-		
-		//TODO：支持html5 video
-
-		if($('#layout-post').length) {
-			$('[data-fancybox="gallery"]').fancybox({
-				loop: true,
-				buttons: [
-					"zoom",
-					"share",
-					"slideShow",
-					"fullScreen",
-					//"download",
-					"thumbs",
-					"close"
-				],
-				protect: true
-			});
-		}
-	})();
-</script>
-		</main>
-
-		<!--footer-->
-		<footer>
-	<div id="navigation-show">
-		<ul id="global-nav">
-	
-		<li class="menu-home">
-			<a href="/" class="menu-item-home" target="_blank">主页</a>
-		</li>
-		
-	
-		<li class="menu-archive">
-			<a href="/archives" class="menu-item-archive" target="_blank">归档</a>
-		</li>
-		
-	
-		<li class="menu-categories">
-			<a href="/categories" class="menu-item-categories" target="_blank">分类</a>
-		</li>
-		
-	
-		<li class="menu-tags">
-			<a href="/tags" class="menu-item-tags" target="_blank">标签</a>
-		</li>
-		
-	
-		<li class="menu-about">
-			<a href="/about" class="menu-item-about" target="_blank">关于</a>
-		</li>
-		
-	
-		<li class="menu-gallery">
-			<a href="/gallery" class="menu-item-gallery" target="_blank">相册</a>
-		</li>
-		
-	
-
-	
-		<li class="menu-search">
-			<a href="javascript:;" class="popup-trigger">搜索</a>
-		</li>
-	
-</ul>
-	</div>
-
-	<div class="copyright">
-		<p>
-			 
-				&copy;2023 - 2024, content by SteveHu. All Rights Reserved.
-			
-			
-				<a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="noopener">Annie</a> by Sariay.
-			
-		</p>
-		<p>
-			
-
-	<!-- busuanzi -->
-	<!-- busuanzi -->
-
-
-
-			<a href="javascript:zh_tran('s');" class="zh_click" id="zh_click_s">简体</a> 
-			<a href="javascript:zh_tran('t');" class="zh_click" id="zh_click_t">繁體</a>				
-		</p>
-	</div>		
-</footer>
-		
-	<!-- Local or hitokoto! -->
-
-	
-<script src="/plugin/motto/motto.js"></script>
-
-	
-	<script type="text/javascript">
-		(function motto(){
-			let mottoText = getMingYanContent().split('</br> - </br>'),
-			
-			mottoTextContent = mottoText[0]?mottoText[0]:'请刷新...',
-			
-			mottoTextFrom = mottoText[1]?mottoText[1]:'one/一个';
-			
-			mottoTextContent = mottoTextContent.trim().substring(0, 100);
-		
-			$("#motto-content").html( mottoTextContent);
-			$("#motto-author").html( mottoTextFrom  );
-		})();	
-	</script>	
-
-
-
-<!-- love effect -->
-
-
-<!-- back to top -->
-
-	<div id="totop">
-	<span class="icon-circle-up"></span>
-</div>
-
-
-
-<!-- site analysis -->
-
-
-	<!-- site-analysis -->
-	
-	
-	
-	
-	
- 
-
-<!-- leancloud -->
-
-
-	<!-- leancloud -->
-	<!--
-	时间：2018-11-27
-	描述：
-		文章访问量：visitors
-		文章喜欢量：likes	
-		文章排行榜：topNPost
-		其他得说明：
-			01-Cookie相关的函数 
-				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
-			02-visitors相关的函数 
-				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
-				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
-			03-topNPost相关的函数
-				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
-			04-likes相关的函数，
-				参考了01 & 02进行简单的设计与实现
--->
-
-
-	
 
   
 
-	<!--
-	时间：2018-10-3
-	描述：
-		插件名称：hexo-generator-search-zip
-		插件来源: https://github.com/SuperKieran/hexo-generator-search-zip
-		代码参考：https://github.com/SuperKieran/TKL/blob/master/layout/_partial/search.ejs(Include: js & css)	
--->
-<div class="popup search-popup local-search-popup scrollbar" >
-	<div class="local-search-container">
-		<span class="popup-btn-close">
-      		ESC
-   		</span>
-		<div class="local-search-header">
-			<div class="input-prompt">				
-			</div>
-			<input autocomplete="off" placeholder="Search..." type="text" id="local-search-input">
-		</div>
-		<div class="local-search-body">
-			<div id="local-search-output"></div>
-		</div>
-		<div class="local-search-footer">
-			<div class="topN-post">				
-				
-								
-			</div>
-		</div>
-	</div>
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lovehuiyuanai.github.io/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.luogu.com.cn/upload/image_hosting/bq1h7111.png">
+      <meta itemprop="name" content="Steve Hu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Steve Hu的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ChatGLM的CPU推理方案 | Steve Hu的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ChatGLM的CPU推理方案
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-20 19:12:07 / 修改时间：19:16:43" itemprop="dateCreated datePublished" datetime="2023-08-20T19:12:07+08:00">2023-08-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer, AutoModel</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>)</span><br><span class="line">model = AutoModel.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>).half().<span class="built_in">float</span>()</span><br><span class="line">model = model.<span class="built_in">eval</span>()</span><br><span class="line">response, history = model.chat(tokenizer, <span class="string">&quot;写一首赞美雪的现代诗&quot;</span>, history=[])</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/17/%E7%99%BD%E5%BC%80%E6%B0%B4/" rel="prev" title="白开水">
+                  <i class="fa fa-angle-left"></i> 白开水
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/23/%E4%B8%B8%E4%BB%94/" rel="next" title="丸仔">
+                  丸仔 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
 
-<script src="/plugin/search/ziploader.js"></script>
-<script src="/js/search.js"></script>
-
-
-<script type="text/javascript">
-	var search_path = 'search.json',
-		zip_Path = '/search.zip',
-		version_Path = '/searchVersion.txt',
-		input_Trigger = 'auto',
-		top_N = '2';
-
-	themeLocalSearch({
-		search_path, 
-		zip_Path, 
-		version_Path, 
-		input_Trigger, 
-		top_N
-	});
-</script>
 
 
 
-<script src="/plugin/chinese/chinese.js"></script>
-<script src="/plugin/imagelazyloader/yall.min.js"></script>
-<script src="/plugin/imageloaded/imagesloaded.pkgd.min.js"></script>
-<script src="/plugin/nicescroll/jquery.nicescroll.js"></script>
-<script src="/plugin/resizediv/resizediv.js"></script>
-<script src="/js/main.js"></script>
 
-	</body>	
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Steve Hu</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
 </html>
