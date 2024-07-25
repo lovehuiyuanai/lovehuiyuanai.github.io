@@ -149,13 +149,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -449,83 +449,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">mnist = tf.keras.datasets.mnist</span><br><span class="line"></span><br><span class="line">(x_train, y_train), (x_test, y_test) = mnist.load_data()</span><br><span class="line">x_train, x_test = x_train / <span class="number">255.0</span>, x_test / <span class="number">255.0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model = tf.keras.models.Sequential([</span><br><span class="line">  tf.keras.layers.Flatten(input_shape=(<span class="number">28</span>, <span class="number">28</span>)),</span><br><span class="line">  tf.keras.layers.Dense(<span class="number">128</span>, activation=<span class="string">&#x27;relu&#x27;</span>),</span><br><span class="line">  tf.keras.layers.Dropout(<span class="number">0.2</span>),</span><br><span class="line">  tf.keras.layers.Dense(<span class="number">10</span>, activation=<span class="string">&#x27;softmax&#x27;</span>)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=<span class="string">&#x27;adam&#x27;</span>,loss=<span class="string">&#x27;sparse_categorical_crossentropy&#x27;</span>,metrics=[<span class="string">&#x27;accuracy&#x27;</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, epochs=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">model.evaluate(x_test,  y_test, verbose=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lovehuiyuanai.github.io/2024/02/17/%E4%B8%8B%E5%AD%A6%E6%9C%9F%E8%AE%A1%E5%88%92%E6%9D%A5%E5%92%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.luogu.com.cn/upload/image_hosting/bq1h7111.png">
-      <meta itemprop="name" content="Steve Hu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Steve Hu的博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Steve Hu的博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/17/%E4%B8%8B%E5%AD%A6%E6%9C%9F%E8%AE%A1%E5%88%92%E6%9D%A5%E5%92%AF/" class="post-title-link" itemprop="url">下学期计划来咯</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2024-02-17 14:59:44 / 修改时间：15:35:08" itemprop="dateCreated datePublished" datetime="2024-02-17T14:59:44+08:00">2024-02-17</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近快开学了，啊计划也该定一定了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/02/17/%E4%B8%8B%E5%AD%A6%E6%9C%9F%E8%AE%A1%E5%88%92%E6%9D%A5%E5%92%AF/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
@@ -865,7 +788,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://lovehuiyuanai.github.io/2023/08/27/%E6%88%91%E6%83%B3%E4%BD%A0%E4%BA%86/">
+    <link itemprop="mainEntityOfPage" href="https://lovehuiyuanai.github.io/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://cdn.luogu.com.cn/upload/image_hosting/bq1h7111.png">
@@ -883,7 +806,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/27/%E6%88%91%E6%83%B3%E4%BD%A0%E4%BA%86/" class="post-title-link" itemprop="url">我想你了</a>
+          <a href="/2023/08/20/ChatGLM%E7%9A%84CPU%E6%8E%A8%E7%90%86%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">ChatGLM的CPU推理方案</a>
         </h2>
 
         <div class="post-meta-container">
@@ -893,15 +816,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-08-27 17:14:12" itemprop="dateCreated datePublished" datetime="2023-08-27T17:14:12+08:00">2023-08-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-05 17:42:04" itemprop="dateModified" datetime="2024-05-05T17:42:04+08:00">2024-05-05</time>
+      <time title="创建时间：2023-08-20 19:12:07 / 修改时间：19:16:43" itemprop="dateCreated datePublished" datetime="2023-08-20T19:12:07+08:00">2023-08-20</time>
     </span>
 
   
@@ -914,22 +831,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>                                                将它悬于窗畔，</p>
-<p>                                                   观之，细观，</p>
-<p>                                            其在日光下熠熠生辉，</p>
-<p>                                            犹如水晶般剔透无暇，</p>
-<p>                                        恰似你的眸子般明净如水。</p>
-<p>                                                    闻之，倾听，</p>
-<p>                                             它在微风中轻轻摇摆，</p>
-<p>                                              宛如琴音般悠扬动人，</p>
-<p>                                         犹似你的笑声那般欢快宜人。</p>
-<p>                                                此刻，又闻其声，</p>
-<p>                                                    清亮而干脆，</p>
-<p>                                    那是风儿承载着我悄然送达的心语，</p>
-<p>                                            嘘，请静静的听吧，</p>
-<p>                                                那清脆的声响，</p>
-<p>                                            每个音节都在诉说，</p>
-<p>                                                    我想你了。</p>
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer, AutoModel</span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>)</span><br><span class="line">model = AutoModel.from_pretrained(<span class="string">&quot;THUDM/chatglm2-6b-int4&quot;</span>, trust_remote_code=<span class="literal">True</span>).half().<span class="built_in">float</span>()</span><br><span class="line">model = model.<span class="built_in">eval</span>()</span><br><span class="line">response, history = model.chat(tokenizer, <span class="string">&quot;写一首赞美雪的现代诗&quot;</span>, history=[])</span><br><span class="line"><span class="built_in">print</span>(response)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -948,8 +850,85 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lovehuiyuanai.github.io/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.luogu.com.cn/upload/image_hosting/bq1h7111.png">
+      <meta itemprop="name" content="Steve Hu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Steve Hu的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Steve Hu的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="post-title-link" itemprop="url">紫鲸第一、二章</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-15 22:03:57 / 修改时间：22:10:57" itemprop="dateCreated datePublished" datetime="2023-08-15T22:03:57+08:00">2023-08-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/08/15/%E7%B4%AB%E9%B2%B8%E7%AC%AC%E4%B8%80%E7%AB%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
